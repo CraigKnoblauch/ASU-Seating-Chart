@@ -41,8 +41,8 @@ class NeebHall:
         self.L_ROW = Row(let= 'L', sn= list(range(1, 40+1)) )
         self.M_ROW = Row(let= 'M', sn= list(range(1, 41+1)) )
         self.N_ROW = Row(let= 'N', sn= list(range(1, 37+1)) )
-        self.O_ROW = Row(let= 'O', sn= [1, 2, 3, 4, 5, 6, 7, 8, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37], dn= [[8,27]])
-        self.P_ROW = Row(let= 'P', sn= [1, 2, 3, 4, 5, 6, 7, 8, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37], dn= [[8,27]])
+        self.O_ROW = Row(let= 'O', sn= [1, 2, 3, 4, 5, 6, 7, 8, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37], dn= [[8,27]], sp=1)
+        self.P_ROW = Row(let= 'P', sn= [1, 2, 3, 4, 5, 6, 7, 8, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37], dn= [[8,27]], sp=1)
 
         self.HALL = {'B': self.B_ROW, 'C': self.C_ROW, 'D': self.D_ROW,
                      'E': self.E_ROW, 'F': self.F_ROW, 'G': self.G_ROW,
