@@ -4,18 +4,28 @@
 
 class Row:
 
-    def __init__(self, let='', sn=[], dn=[]):
+    def __init__(self, let='', sn=[], dn=[], sp=0):
         self.letter = let
         self.seat_numbers = sn
         self.divided_neighbors = dn
-        self.taken_seats = [False for i in self.seat_numbers]
+        self.start_position = sp
+        self.taken_seats = [False] * len(self.seat_numbers)
 
     def add_divided_neighbor(self, sing_dn):
         self.divided_neighbors.append(sing_dn)
 
+    def set_start_position(self, start_i):
+        self.start_position = start_i
+
+    def take_seat(self, seat):
+        self.taken_seats[seat-1] = True
+
+    def free_seat(self, seat):
+        self.taken_seats[seat-1] = False
+
 
 class NeebHall:
-    
+
     def __init__(self):
         self.B_ROW = Row(let= 'B', sn= list(range(1, 23+1)) )
         self.C_ROW = Row(let= 'C', sn= list(range(1, 26+1)) )
@@ -32,4 +42,8 @@ class NeebHall:
         self.O_ROW = Row(let= 'O', sn= [1, 2, 3, 4, 5, 6, 7, 8, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37], dn= [[8,27]])
         self.P_ROW = Row(let= 'P', sn= [1, 2, 3, 4, 5, 6, 7, 8, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37], dn= [[8,27]])
 
-        self.HALL = [B_ROW, C_ROW, D_ROW, E_ROW, F_ROW, G_ROW, H_ROW, J_ROW, K_ROW, L_ROW, M_ROW, N_ROW, O_ROW, P_ROW]
+        self.HALL = {'B': self.B_ROW, 'C': self.C_ROW, 'D': self.D_ROW,
+                     'E': self.E_ROW, 'F': self.F_ROW, 'G': self.G_ROW,
+                     'H': self.H_ROW, 'J': self.J_ROW, 'K': self.K_ROW,
+                     'L': self.L_ROW, 'M': self.M_ROW, 'N': self.N_ROW,
+                     'O': self.O_ROW, 'P': self.P_ROW }
