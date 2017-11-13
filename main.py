@@ -1,5 +1,4 @@
-from lecturehalls import NeebHall
-import seating_chart as SC
+import seating
 import sys
 import os
 
