@@ -7,9 +7,11 @@ class Row:
     def __init__(self, let='', sn=[], dn=[], sp=0):
         self.letter = let
         self.seat_numbers = sn
+        self.assigned_seats = [False] * len(self.seat_numbers)
+        self.occupants = [0] * len(self.seat_numbers)  # Will hold Student objects. DO NOT MAKE AN OFF BY ONE ERROR
+
         self.divided_neighbors = dn
         self.start_position = sp
-        self.taken_seats = [False] * len(self.seat_numbers)
 
     def add_divided_neighbor(self, sing_dn):
         self.divided_neighbors.append(sing_dn)
@@ -17,11 +19,11 @@ class Row:
     def set_start_position(self, start_i):
         self.start_position = start_i
 
-    def take_seat(self, seat):
-        self.taken_seats[seat-1] = True
+    def assign_seat(self, seat):
+        self.assigned_seats[seat-1] = True
 
     def free_seat(self, seat):
-        self.taken_seats[seat-1] = False
+        self.assigned_seats[seat-1] = False
 
 
 class NeebHall:
