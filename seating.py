@@ -1,4 +1,5 @@
 from lecturehalls import NeebHall
+from student import Student
 import csv
 import random
 import sys
@@ -12,19 +13,22 @@ def parse_file(filename):
 
     # NOTE: No need to check if the file does not exist; that's taken care
     # of in main.py
-    with open(filename) as f:
-        row_list = []
+    with open(filename, "rU") as f:
+        student_list = []
         reader = csv.reader(f)
         for row in reader:
-            row_str = str(row[first_name_column]).strip() + "|"
-            row_str += str(row[last_name_column]).strip() + "|"
-            row_str += str(row[pin_column]).strip()
+            student_obj = Student()
 
-            if "\ufeff" in row_str:
-                row_str = row_str.replace("\ufeff", "")
+            # Keep input formatting
+            student_obj.first_name = str(row[first_name_column]).strip()
+            student_obj.last_name = str(row[last_name_column]).strip()
+            student_obj.pin = row[pin_column]
 
-            row_list.append(row_str)
+            if "\ufeff" in student_obj.first_name:
+                student_obj.first_name = student_obj.first_name.replace("\ufeff", "")
 
-    random.shuffle(row_list)
+            student_list.append(student_obj)
 
-    return row_list
+    random.shuffle(student_list)
+
+    return student_list
