@@ -1,4 +1,4 @@
-from lecturehalls import NEEB_HALL
+from lecturehalls import NeebHall
 import csv
 import random
 import sys
