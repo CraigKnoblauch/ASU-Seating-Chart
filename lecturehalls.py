@@ -25,6 +25,9 @@ class Row:
     def free_seat(self, seat):
         self.assigned_seats[seat-1] = False
 
+    def count_seats(self):
+        return len(self.seat_numbers)
+
 
 class NeebHall:
 
@@ -49,3 +52,7 @@ class NeebHall:
                      'H': self.H_ROW, 'J': self.J_ROW, 'K': self.K_ROW,
                      'L': self.L_ROW, 'M': self.M_ROW, 'N': self.N_ROW,
                      'O': self.O_ROW, 'P': self.P_ROW }
+
+        self.seat_count = 0
+        for row in self.HALL.values():
+            self.seat_count += row.count_seats()
