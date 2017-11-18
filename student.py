@@ -4,13 +4,13 @@ class Student:
         self.first_name = fn
         self.last_name = ln
         self.pin = p
-        self.seat = '0'  # Because a seat of 0 makes no sense
+        self.seat = '-0'  # Because a seat named -0 makes no sense
 
     def assign_seat(self, seat_str):
         self.seat = seat_str
 
     def is_seated(self):
-        return not self.seat == '0'
+        return not self.seat == '-0'
 
     # NOTE: Currently just for trouble shooting
     def print_student(self):
