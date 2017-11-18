@@ -32,3 +32,10 @@ def parse_file(filename):
     random.shuffle(student_list)
 
     return student_list
+
+def seat_students(ROW, STUDENTS, seat_indices_to_be_taken):
+    available_seats  = ROW.get_available_seat_list()
+    i = 0
+    for j in seat_indices_to_be_taken:
+        ROW.assign_seat(available_seats[seat_indices_to_be_taken[j]], STUDENTS[i])
+        i += 1
