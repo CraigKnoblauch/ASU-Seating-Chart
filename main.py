@@ -1,3 +1,4 @@
+from lecturehalls import NeebHall
 import seating
 import sys
 import os
@@ -18,3 +19,6 @@ if file_name[-4:] != ".csv":
     sys.exit("\nERROR: Input was not a .csv file\n")
 
 #TODO: Next up is assignment logic
+neeb = NeebHall()
+students = seating.parse_file(file_name)
+seating.seat_students(students, neeb)
