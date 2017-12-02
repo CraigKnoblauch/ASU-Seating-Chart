@@ -22,6 +22,12 @@ class Row:
     def add_divided_neighbor(self, sing_dn):
         self.divided_neighbors.append(sing_dn)
 
+    def has_divided_neighbors(self): #NOTE: bring to master
+        if self.divided_neighbors:
+            return True
+        else:
+            return False
+
     def set_start_position(self, start_i):
         self.start_position = start_i
 
@@ -61,6 +67,14 @@ class Row:
 
         return available_seats
 
+    def get_available_seat_indices_list(self):  #NOTE: Bring to master, then again maybe not this whole seat index nonsense may just be redundant and unnescessary
+        aval_seats = self.get_available_seat_list()
+        seat_indices = list()
+        for seat in aval_seats:
+            seat_indices.append(self.get_seat_index(seat))
+
+        return seat_indices
+
 
 class NeebHall:
 
@@ -78,8 +92,8 @@ class NeebHall:
         self.L_ROW = Row(let= 'L', sn= list(range(1, 40+1)) )
         self.M_ROW = Row(let= 'M', sn= list(range(1, 41+1)) )
         self.N_ROW = Row(let= 'N', sn= list(range(1, 37+1)) )
-        self.O_ROW = Row(let= 'O', sn= [1, 2, 3, 4, 5, 6, 7, 8, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37], dn= [[8,27]], sp=1)
-        self.P_ROW = Row(let= 'P', sn= [1, 2, 3, 4, 5, 6, 7, 8, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37], dn= [[8,27]], sp=1)
+        self.O_ROW = Row(let= 'O', sn= [1, 2, 3, 4, 5, 6, 7, 8, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37], dn= [[8,27]], sp= 0) #NOTE: Bring to master
+        self.P_ROW = Row(let= 'P', sn= [1, 2, 3, 4, 5, 6, 7, 8, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37], dn= [[8,27]], sp= 0) #NOTE: Bring to master
 
         self.HALL = {'B': self.B_ROW, 'C': self.C_ROW, 'D': self.D_ROW,
                      'E': self.E_ROW, 'F': self.F_ROW, 'G': self.G_ROW,
@@ -90,3 +104,10 @@ class NeebHall:
         self.seat_count = 0
         for row in self.HALL.values():
             self.seat_count += row.count_seats()
+
+    def count_rows(self):  #NOTE: Bring to master
+        i = 0
+        for v in self.HALL.values():
+            i += 1
+
+        return i
