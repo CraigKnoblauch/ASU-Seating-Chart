@@ -40,7 +40,7 @@ def output_file(students):
 
 # NOTE: Process specific to Austin-Bren-2017F-83238, should not be used in full in other versions
 def seat_students(students, hall):
-    student_index = 0
+    updated_students = list()
 
     # NOTE: Testing linear fill - SUCCESS
     # i = 0
@@ -61,13 +61,19 @@ def seat_students(students, hall):
         pos = hall_row.start_position
         while True:
             try:
-                hall_row.assign_seat(hall_row.seat_numbers[pos],
-                                     students[student_index])
+                students[0]
             except IndexError:
                 print("All students seated")
                 break
 
-            student_index += 1
+            try:
+                updated_students.append(students[0])
+                hall_row.assign_seat(hall_row.seat_numbers[pos],
+                                     students.pop(0))
+            except IndexError:
+                print("seat_numbers index error")
+                break
+
             pos += 2
 
             try:
@@ -94,4 +100,4 @@ def seat_students(students, hall):
     #
     # remaining_student_N = remaining_student_N % hall.count_rows()
 
-    output_file(students)
+    output_file(updated_students)
