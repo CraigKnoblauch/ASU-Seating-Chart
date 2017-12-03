@@ -36,8 +36,24 @@ def parse_file(filename):
 
 # TODO: Modify ot produce output csv file
 def output_file(students):
-    for s in students:
-        s.print_student()
+    # Sort students by pin
+    students.sort(key=lambda Student: int(Student.pin))
+    filename = "output/seat_chart_output.csv"
+    with open(filename, 'w') as f:
+        writer = csv.DictWriter(f, fieldnames= ['Seat', 'Last', 'First', 'PIN'])
+        writer.writerow({'Seat':'Seat',
+                         'Last':'Last',
+                         'First':'First',
+                         'PIN':'PIN'
+                         })
+        for s in students:
+            writer.writerow({'Seat': s.seat,
+                             'Last': s.last_name,
+                             'First': s.first_name,
+                             'PIN': s.pin
+                             })
+
+
 
 # NOTE: Process may not be specific to Austin-Bren-2017F-83238
 def seat_students(students, hall):
@@ -57,13 +73,10 @@ def seat_students(students, hall):
             while i < hall_row.count_available_seats():
                 try:
                     updated_students.append(students[0])
-                    hall_row.assign_seat(aval_seats[math.ceil(i)], students.pop(0))  
+                    hall_row.assign_seat(aval_seats[math.ceil(i)], students.pop(0))
                 except IndexError:
-                    print("All students seated")
                     break
-                print("d: " + str(d))
                 i += d
-                print("i: " + str(i))
 
         start = False
 
