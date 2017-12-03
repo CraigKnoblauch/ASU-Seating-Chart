@@ -1,6 +1,6 @@
-# Module for holding Lecture Hall classes. If this program ever needs to be expanded,
-# a lecture hall can be added here as a class.
-
+# Module for holding Lecture Hall classes. 
+# NOTE: Awaiting Row refactor
+# NOTE: Awaiting inheritance implementation for lecture halls
 
 class Row:
 
