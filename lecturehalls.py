@@ -15,7 +15,8 @@ class Row:
         # Even if you were counting backwards it seems unlikely that there would
         # be 9,999 seats in a row. I don't know why I've just got a feeling
         if sp == -9999:
-            self.start_position = self.count_seats() % 2 #NOTE: bring to master
+            # self.start_position = self.count_seats() % 2 #NOTE: bring to master
+            self.start_position = 0 # NOTE: specific to Austin-Bren-2017F-83238
         else:
             self.start_position = sp
 
@@ -109,5 +110,12 @@ class NeebHall:
         i = 0
         for v in self.HALL.values():
             i += 1
+
+        return i
+
+    def count_available_seats(self):  #NOTE: Bring to master
+        i = 0
+        for r in self.HALL.values():
+            i += r.count_available_seats()
 
         return i
