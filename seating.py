@@ -34,7 +34,6 @@ def parse_file(filename):
 
     return student_list
 
-# TODO: Modify ot produce output csv file
 def output_file(students):
     # Sort students by pin
     students.sort(key=lambda Student: int(Student.pin))
