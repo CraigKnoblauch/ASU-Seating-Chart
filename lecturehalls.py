@@ -1,8 +1,34 @@
 # Module for holding Lecture Hall classes. If this program ever needs to be expanded,
-# a lecture hall can be added here as a class.
+# a lecture hall can be added here as a class that inherits from the LectureHall class.
 from row import Row
 
-class NeebHall:
+class LectureHall:
+    def __init__(self, hall_dict):
+        self.HALL = hall_dict
+
+    def count_seats(self):
+        i = 0
+        for r in self.HALL.values():
+            i += r.count_seats()
+
+        return i
+
+    def count_rows(self):
+        i = 0
+        for v in self.HALL.values():
+            i += 1
+
+        return i
+
+    def count_available_seats(self):
+        i = 0
+        for r in self.HALL.values():
+            i += r.count_available_seats()
+
+        return i
+
+
+class NeebHall(LectureHall):
 
     def __init__(self):
         self.A_ROW = Row(let= 'A', sn= [1,2,3,4,5,6], dn=[3,4])
@@ -27,20 +53,4 @@ class NeebHall:
                      'K': self.K_ROW, 'L': self.L_ROW, 'M': self.M_ROW,
                      'N': self.N_ROW, 'O': self.O_ROW, 'P': self.P_ROW }
 
-        self.seat_count = 0
-        for r in self.HALL.values():
-            self.seat_count += r.count_seats()
-
-    def count_rows(self):
-        i = 0
-        for v in self.HALL.values():
-            i += 1
-
-        return i
-
-    def count_available_seats(self):
-        i = 0
-        for r in self.HALL.values():
-            i += r.count_available_seats()
-
-        return i
+        LectureHall.__init__(self, self.HALL)
