@@ -1,19 +1,11 @@
 class Row:
 
-    def __init__(self, let='', sn=[], dn=[], sp=-9999):
+    def __init__(self, let='', sn=[], dn=[]):
         self.letter = let.upper()
         self.seat_numbers = sn
         self.assigned_seats = [False] * len(self.seat_numbers)
         self.occupants = [0] * len(self.seat_numbers)  # Will hold Student objects. DO NOT MAKE AN OFF BY ONE ERROR
-
         self.divided_neighbors = dn
-
-        # Even if you were counting backwards it seems unlikely that there would
-        # be 9,999 seats in a row. I don't know why I've just got a feeling
-        if sp == -9999:
-            self.start_position = self.count_seats() % 2
-        else:
-            self.start_position = sp
 
     def add_divided_neighbor(self, sing_dn):
         self.divided_neighbors.append(sing_dn)
@@ -23,9 +15,6 @@ class Row:
             return True
         else:
             return False
-
-    def set_start_position(self, start_i):
-        self.start_position = start_i
 
     def get_seat_index(self, seat_number):
         # Assumes that there are no duplicate seat numbers
