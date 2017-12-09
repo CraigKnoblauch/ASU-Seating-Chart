@@ -15,12 +15,18 @@ class Row:
         # Even if you were counting backwards it seems unlikely that there would
         # be 9,999 seats in a row. I don't know why I've just got a feeling
         if sp == -9999:
-            self.start_position = count_seats() % 2
+            self.start_position = self.count_seats() % 2
         else:
             self.start_position = sp
 
     def add_divided_neighbor(self, sing_dn):
         self.divided_neighbors.append(sing_dn)
+
+    def has_divided_neighbors(self): #NOTE: bring to master
+        if self.divided_neighbors:
+            return True
+        else:
+            return False
 
     def set_start_position(self, start_i):
         self.start_position = start_i
@@ -61,11 +67,19 @@ class Row:
 
         return available_seats
 
+    def get_available_seat_indices_list(self):
+        aval_seats = self.get_available_seat_list()
+        seat_indices = list()
+        for seat in aval_seats:
+            seat_indices.append(self.get_seat_index(seat))
+
+        return seat_indices
+
 
 class NeebHall:
 
     def __init__(self):
-        self.A_ROW = Row(let= 'A', sn= [1,2,3,4,5,6], dn=[3,4])  # NOTE: Should be commented out on Austin-Bren-2017F-83238 branch
+        self.A_ROW = Row(let= 'A', sn= [1,2,3,4,5,6], dn=[3,4])
         self.B_ROW = Row(let= 'B', sn= list(range(1, 23+1)) )
         self.C_ROW = Row(let= 'C', sn= list(range(1, 26+1)) )
         self.D_ROW = Row(let= 'D', sn= list(range(1, 27+1)) )
@@ -81,12 +95,26 @@ class NeebHall:
         self.O_ROW = Row(let= 'O', sn= [1, 2, 3, 4, 5, 6, 7, 8, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37], dn= [[8,27]], sp=1)
         self.P_ROW = Row(let= 'P', sn= [1, 2, 3, 4, 5, 6, 7, 8, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37], dn= [[8,27]], sp=1)
 
-        self.HALL = {'B': self.B_ROW, 'C': self.C_ROW, 'D': self.D_ROW,
-                     'E': self.E_ROW, 'F': self.F_ROW, 'G': self.G_ROW,
-                     'H': self.H_ROW, 'J': self.J_ROW, 'K': self.K_ROW,
-                     'L': self.L_ROW, 'M': self.M_ROW, 'N': self.N_ROW,
-                     'O': self.O_ROW, 'P': self.P_ROW }
+        self.HALL = {'A': self.A_ROW, 'B': self.B_ROW, 'C': self.C_ROW,
+                     'D': self.D_ROW, 'E': self.E_ROW, 'F': self.F_ROW,
+                     'G': self.G_ROW, 'H': self.H_ROW, 'J': self.J_ROW,
+                     'K': self.K_ROW, 'L': self.L_ROW, 'M': self.M_ROW,
+                     'N': self.N_ROW, 'O': self.O_ROW, 'P': self.P_ROW }
 
         self.seat_count = 0
         for row in self.HALL.values():
             self.seat_count += row.count_seats()
+
+    def count_rows(self):
+        i = 0
+        for v in self.HALL.values():
+            i += 1
+
+        return i
+
+    def count_available_seats(self):
+        i = 0
+        for r in self.HALL.values():
+            i += r.count_available_seats()
+
+        return i

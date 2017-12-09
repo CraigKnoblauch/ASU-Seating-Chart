@@ -14,4 +14,4 @@ class Student:
 
     # NOTE: Currently just for trouble shooting
     def print_student(self):
-        print(self.first_name + " " + self.last_name + ": " + self.pin)
+        print(self.first_name + " " + self.last_name + ": " + self.seat)

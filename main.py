@@ -1,3 +1,4 @@
+from lecturehalls import #Hall
 import seating
 import sys
 import os
@@ -17,4 +18,11 @@ if not os.path.isfile(file_name):
 if file_name[-4:] != ".csv":
     sys.exit("\nERROR: Input was not a .csv file\n")
 
-#TODO: Next up is assignment logic
+# Make output directory
+if not os.path.exists("output"):
+    os.makedirs("output")
+
+#NOTE: line 26 to illustrate methodology, does not run, see line 1, 28
+hall = HALL()
+students = seating.parse_file(file_name)
+seating.seat_students(students, hall)
