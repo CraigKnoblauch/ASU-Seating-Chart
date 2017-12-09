@@ -59,10 +59,7 @@ def seat_students(students, hall):
     while len(students) != 0:
         D = len(students) / hall.count_available_seats()  # Density of students per seats
         for hall_row in hall.HALL.values():
-            if start:
-                i = hall_row.start_position
-            else:
-                i = 0
+            i = 0
             r = D * hall_row.count_available_seats()  # Get the number of students to be seated in this row
             d = hall_row.count_available_seats() / r  # Get the number of seats per students
             aval_seats = hall_row.get_available_seat_list()
